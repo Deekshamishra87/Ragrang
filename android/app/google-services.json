@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "440079818364",
+    "project_id": "rag-rang",
+    "storage_bucket": "rag-rang.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:440079818364:android:1343f6ac7f02a8883873f9",
+        "android_client_info": {
+          "package_name": "com.example.rag_rang_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-2q2Lh0qZ6KW1-v5JynuIU-tmib7I_GM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
