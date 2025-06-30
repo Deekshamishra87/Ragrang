@@ -7,8 +7,15 @@ plugins {
 
 android {
     namespace = "com.example.rag_rang_app"
-    compileSdk = flutter.compileSdkVersion
-    ndkVersion = "29.0.13113456"
+    compileSdk = 35
+
+    defaultConfig {
+        applicationId = "com.example.rag_rang_app"
+        minSdk = 23
+        targetSdk = 35
+        versionCode = 1
+        versionName = "1.0"
+    }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -16,35 +23,37 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
+        jvmTarget = "11"
     }
-
-    defaultConfig {
-        applicationId = "com.example.rag_rang_app"
-        minSdk = 23
-        targetSdk = flutter.targetSdkVersion
-        versionCode = flutter.versionCode
-        versionName = flutter.versionName
+    signingConfigs {
+        create("myDebug") {
+            storeFile = file("${rootDir}/debug.keystore")
+            storePassword = "android"
+            keyAlias = "androiddebugkey"
+            keyPassword = "android"
+        }
     }
 
     buildTypes {
-        release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.getByName("debug")
+        getByName("release") {
+            signingConfig = signingConfigs.getByName("myDebug")
+            isMinifyEnabled = false
+            isShrinkResources = false
         }
     }
-}
 
-flutter {
-    source = "../.."
-}
-dependencies {
-    // ✅ Firebase BoM
-    implementation(platform("com.google.firebase:firebase-bom:33.13.0"))
 
-    // ✅ Add Firebase services you need
-    implementation("com.google.firebase:firebase-analytics")
-    // example: implementation("com.google.firebase:firebase-auth")
-    // example: implementation("com.google.firebase:firebase-firestore")
+    flutter {
+        source = "../.."
+    }
+
+    dependencies {
+        // ✅ Firebase BoM
+        implementation(platform("com.google.firebase:firebase-bom:33.13.0"))
+
+        // ✅ Add Firebase services you need
+        implementation("com.google.firebase:firebase-analytics")
+        // implementation("com.google.firebase:firebase-auth")
+        // implementation("com.google.firebase:firebase-firestore")
+    }
 }

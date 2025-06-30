@@ -11,31 +11,22 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<WelcomePage> {
-  bool _shouldNavigate = false;
+  bool _hasNavigated = false;
 
   Future<void> _handleRefresh() async {
     await Future.delayed(const Duration(seconds: 2));
-    if (!mounted) return;
 
-    setState(() {
-      _shouldNavigate = true;
-    });
+    if (!_hasNavigated && mounted) {
+      setState(() => _hasNavigated = true);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const NavbarWidget()),
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_shouldNavigate) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        setState(() {
-          _shouldNavigate = false;
-        });
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const NavbarWidget()),
-        );
-      });
-    }
-
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -57,7 +48,7 @@ class _WelcomePageState extends State<WelcomePage> {
               ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: Container(
-                  height: MediaQuery.of(context).size.height * 0.7, // screen height ka 70%
+                  height: MediaQuery.of(context).size.height * 0.7,
                   decoration: BoxDecoration(
                     color: Colors.deepPurple,
                     boxShadow: [
@@ -76,12 +67,12 @@ class _WelcomePageState extends State<WelcomePage> {
                 ),
               ),
               const SizedBox(height: 40),
-              Center(
+              const Center(
                 child: Text(
-                  "Pull down to refresh and continue",
+                  "⬇ Pull down to enter RagRang ⬇",
                   style: TextStyle(
-                    color: Colors.white60,
-                    fontSize: 14,
+                    color: Colors.white70,
+                    fontSize: 16,
                     fontStyle: FontStyle.italic,
                   ),
                 ),
